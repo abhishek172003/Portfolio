@@ -5,10 +5,12 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPython,
-  // faJs,
+  faJs,
   faGitAlt,
   faGithub,
-  // faJupyter,
+  faReact,
+  faNode,
+  faBootstrap,
 } from "@fortawesome/free-brands-svg-icons";
 import { 
   faDatabase, 
@@ -19,85 +21,59 @@ import {
   faCode,
   faTools
 } from "@fortawesome/free-solid-svg-icons";
+import { HERO_CONTENT, ABOUT_CONTENT, SKILLS, ANIMATION_VARIANTS } from '../constants/constant';
 
-const skills = [
-  // Programming Languages
-  { name: "Python", icon: faPython },
-  { name: "SQL", icon: faDatabase },
-  
-  // Data Analysis
-  { name: "Pandas", icon: faChartLine },
-  { name: "NumPy", icon: faCode },
-  { name: "Matplotlib", icon: faChartLine },
-  { name: "Seaborn", icon: faChartLine },
-  { name: "Plotly", icon: faChartLine },
-  
-  // Machine Learning
-  { name: "Scikit-learn", icon: faBrain },
-  { name: "Feature Engineering", icon: faTools },
-  { name: "Model Evaluation", icon: faBrain },
-  { name: "Hyperparameter Tuning", icon: faTools },
-  
-  // Deep Learning
-  { name: "TensorFlow", icon: faBrain },
-  { name: "Keras", icon: faBrain },
-  { name: "PyTorch", icon: faBrain },
-  { name: "Neural Networks", icon: faBrain },
-  { name: "CNNs", icon: faBrain },
-  { name: "Transfer Learning", icon: faBrain },
-  
-  // Computer Vision
-  { name: "OpenCV", icon: faEye },
-  { name: "Image Preprocessing", icon: faEye },
-  { name: "Data Augmentation", icon: faEye },
-  
-  // Tools
-  { name: "Git", icon: faGitAlt },
-  { name: "GitHub", icon: faGithub },
-  // { name: "Jupyter Notebook", icon: faJupyter },
-  { name: "Google Colab", icon: faLaptopCode },
-  { name: "VS Code", icon: faLaptopCode },
-];
+// Icon mapping for skills
+const iconMap = {
+  faPython,
+  faJs,
+  faGitAlt,
+  faGithub,
+  faReact,
+  faNode,
+  faBootstrap,
+  faDatabase,
+  faLaptopCode,
+  faBrain,
+  faEye,
+  faChartLine,
+  faCode,
+  faTools
+};
 
-const h2variant ={
-  hidden:{opacity:0,
-          y:75
-  },
-  visible:{opacity:1,
-      y:0,
-      ease:"easeOut",
-  }
-} 
+// Flatten skills array for easier rendering
+const allSkills = [
+  ...SKILLS.programmingLanguages,
+  ...SKILLS.dataScience,
+  ...SKILLS.machineLearning,
+  ...SKILLS.deepLearning,
+  ...SKILLS.computerVision,
+  ...SKILLS.webDevelopment,
+  ...SKILLS.tools
+].map(skill => ({
+  ...skill,
+  icon: iconMap[skill.icon] || faCode // fallback to faCode if icon not found
+}));
 
-const pvariant ={
-  hidden:{opacity:0,
-          x:-100
-  },
-  show:{opacity:1,
-      x:0,
-      ease:"easeOut",
-  }
-}
+const h2variant = ANIMATION_VARIANTS;
+const pvariant = {
+  hidden: { opacity: 0, x: -100 },
+  show: { opacity: 1, x: 0, ease: "easeOut" }
+};
 
-const imgvariant ={
-  hidden:{opacity:0,
-          x:100
-  },
-  show:{opacity:1,
-      x:0,
-      ease:"easeOut",
-  }
-}
+const imgvariant = {
+  hidden: { opacity: 0, x: 100 },
+  show: { opacity: 1, x: 0, ease: "easeOut" }
+};
 
 function About() {
   return (
     <div>
       <div className="About">
         <div>
-          <motion.h2  initial="hidden" animate="visible" variants={h2variant}>Hey there! 🧑‍💻😎</motion.h2>
+          <motion.h2 initial="hidden" animate="visible" variants={h2variant}>{HERO_CONTENT.title}</motion.h2>
           <motion.p className="intro-para" variants={pvariant} initial="hidden" animate="show">
-          B.E. Computer Science graduate with a strong foundation in data science and programming, seeking an
-entry-level Data Scientist role to drive data-driven solutions.
+            {HERO_CONTENT.subtitle}
             🎮💻🚀🔥
           </motion.p>
         </div>
@@ -112,7 +88,7 @@ entry-level Data Scientist role to drive data-driven solutions.
           transition={{ repeat: Infinity, repeatType:"loop",duration: 8, ease: "linear" }}
         >
           <div className="skills-wrapper">
-            {skills.concat(skills).map((skill, index) => (
+            {allSkills.concat(allSkills).map((skill, index) => (
               <span key={index} className="skill-item">
                 <FontAwesomeIcon icon={skill.icon} className="skill-icon" />{" "}
                 {skill.name}

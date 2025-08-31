@@ -1,48 +1,90 @@
-.contact{
+.contact {
     justify-content: center;
     max-width: 80%;
     padding: 20px;
     margin: auto;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 .contacts {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    flex-wrap:wrap;
-    height: 280px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem 0;
+    width: 100%;
+    max-width: 800px;
 }
 
-.intro-con{
+.intro-con {
     text-align: center;
     color: var(--text-secondary); 
-    /* padding-bottom: 1em; */
     font-weight: 600;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
 }
   
 .contact-link {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
     color: var(--text-primary);
     gap: 1rem; 
+    transition: all 0.3s ease;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: var(--bg-secondary);
+    min-width: 150px;
+    min-height: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.contact-link:hover {
+    color: var(--text-secondary);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-link h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.contact-link svg {
+    color: var(--text-primary);
     transition: color 0.3s ease;
-    padding-bottom: 1em;
+}
+
+.contact-link:hover svg {
+    color: var(--text-secondary);
 }
 
 #email-link .tooltip {
     visibility: hidden;
-    background-color: rgba(40, 39, 39, 0.8);
+    background-color: rgba(40, 39, 39, 0.9);
+    color: white;
     text-align: center;
-    padding: 6px;
-    border-radius: 5px;
+    padding: 8px 12px;
+    border-radius: 6px;
     font-size: 12px;
     position: absolute;
-    margin-top: 5em;
-    margin-left:5em;
+    bottom: -40px;
+    left: 50%;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s;
-    white-space: nowrap; 
+    white-space: nowrap;
+    z-index: 1000;
 }
   
 #email-link:hover .tooltip {
@@ -50,16 +92,60 @@
     opacity: 1;
 }
 
-.contact-link:hover {
-color: var(--text-secondary); 
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact {
+        max-width: 95%;
+        padding: 15px;
+    }
+    
+    .contacts {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1rem 0;
+    }
+    
+    .contact-link {
+        min-width: 120px;
+        min-height: 120px;
+        padding: 1rem;
+    }
+    
+    .intro-con {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
 }
 
-@media (max-width: 480px),(max-width: 1240px){
-    .contact{
-        max-width: 100%; 
-    }  
-    .contacts{
-        flex-direction: column;
-        align-items: center;
+@media (max-width: 480px) {
+    .contact {
+        max-width: 100%;
+        padding: 10px;
+    }
+    
+    .contacts {
+        gap: 1rem;
+    }
+    
+    .contact-link {
+        min-width: 100px;
+        min-height: 100px;
+        padding: 0.8rem;
+    }
+    
+    .intro-con {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .contacts {
+        gap: 1.5rem;
+    }
+    
+    .contact-link {
+        min-width: 130px;
+        min-height: 130px;
     }
 }

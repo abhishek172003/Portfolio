@@ -1,67 +1,70 @@
 import './Contact.css'
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faLinkedin, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import {motion} from "framer-motion";
-
-const secVar = {
-  hidden : {opacity:0},
-  show : {
-      opacity:1,
-      transition :{
-          staggerChildren : 0.5,
-          delay:0.2
-      }
-  },
-}
-
-const h2variant ={
-  hidden:{opacity:0,
-          y:75
-  },
-  visible:{opacity:1,
-      y:0,
-      ease:"easeOut",
-      delay:0.5
-  }
-} 
-const avariant ={
-  hidden:{opacity:0,
-          x:-100
-  },
-  show:{opacity:1,
-      x:0,
-      ease:"easeOut",
-  }
-} 
+import { CONTACT_INFO } from '../constants/constant';
 
 function Contact() {
+    // Debug: Log the contact info to console
+    // console.log('CONTACT_INFO:', CONTACT_INFO);
+    
     return (
       <div className="contact">
-        <motion.h2 className="intro-con" initial="hidden" animate="visible" variants={h2variant}>If you liked my portfolio, Let's Connect 🚀.</motion.h2>
-        <motion.section className="contacts" variants={secVar} initial="hidden"
-            animate="show">
-        <motion.a href="mailto:abhishekpalve55@gmail.com" id='email-link' className="contact-link" variants={avariant}>
-        <FontAwesomeIcon icon={faEnvelope} size="2x" />
-        <h3>Email</h3>
-        <span className="tooltip">abhishekpalve55@gmail.com</span>
-        </motion.a>
-        <motion.a href="https://github.com/abhishek172003" target="_blank" rel="noopener noreferrer" className="contact-link" variants={avariant}>
-          <FontAwesomeIcon icon={faGithub} size="2x" />
-          <h3>Github</h3>
-        </motion.a>
+        <h2 className="intro-con">
+          If you liked my portfolio, Let's Connect 🚀.
+        </h2>
         
-        <motion.a href="https://www.linkedin.com/in/abhishek-palve-652ba91b1/" target="_blank" rel="noopener noreferrer" className="contact-link" variants={avariant}>
-          <FontAwesomeIcon icon={faLinkedin} size="2x" />
-          <h3>LinkedIn</h3>
-        </motion.a>
+        {/* Debug: Show contact info as text */}
+        <div style={{marginBottom: '2rem', textAlign: 'center', color: 'var(--text-secondary)'}}>
+          <p>Debug Info:</p>
+          <p>Email: {CONTACT_INFO.email}</p>
+          <p>GitHub: {CONTACT_INFO.socialLinks.github}</p>
+          <p>LinkedIn: {CONTACT_INFO.socialLinks.linkedin}</p>
+          <p>Twitter: {CONTACT_INFO.socialLinks.twitter}</p>
+        </div>
         
-        <motion.a href="https://x.com/AbhishekPalve8" target="_blank" rel="noopener noreferrer" className="contact-link" variants={avariant}>
-          <FontAwesomeIcon icon={faXTwitter} size="2x" />
-          <h3>Twitter (X)</h3>
-        </motion.a>
-        </motion.section>
+        <section className="contacts">
+          <a 
+            href={`mailto:${CONTACT_INFO.email}`} 
+            id='email-link' 
+            className="contact-link"
+          >
+            <FontAwesomeIcon icon={faEnvelope} size="2x" />
+            <h3>Email</h3>
+            <span className="tooltip">{CONTACT_INFO.email}</span>
+          </a>
+          
+          <a 
+            href={CONTACT_INFO.socialLinks.github} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="contact-link"
+          >
+            <FontAwesomeIcon icon={faGithub} size="2x" />
+            <h3>Github</h3>
+          </a>
+          
+          <a 
+            href={CONTACT_INFO.socialLinks.linkedin} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="contact-link"
+          >
+            <FontAwesomeIcon icon={faLinkedin} size="2x" />
+            <h3>LinkedIn</h3>
+          </a>
+          
+          <a 
+            href={CONTACT_INFO.socialLinks.twitter} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="contact-link"
+          >
+            <FontAwesomeIcon icon={faTwitter} size="2x" />
+            <h3>Twitter (X)</h3>
+          </a>
+        </section>
       </div>
     );
   }
